@@ -4,7 +4,6 @@ import argparse
 from pathlib import Path
 
 from app.export.report import render_markdown
-from app.export.report_html import render_html
 from app.interpretation_engine.engine import InterpretationEngine
 from app.models import Category, PatientProfile, Sex
 from app.ocr.service import OCRService
@@ -19,7 +18,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--categoria", choices=["nino", "adulto", "adulto_mayor"], required=True)
     parser.add_argument("--erc", action="store_true", help="Indica presencia de ERC")
     parser.add_argument("--etapa-erc", type=int, choices=[1, 2, 3, 4, 5])
-    parser.add_argument("--output", default="reporte.html")
+    parser.add_argument("--output", default="reporte.md")
     return parser
 
 
@@ -40,12 +39,9 @@ def main() -> None:
 
     engine = InterpretationEngine(repository)
     report = engine.analyze(profile, extracted)
-    if args.output.lower().endswith(".html"):
-        content = render_html(report)
-    else:
-        content = render_markdown(report)
+    markdown = render_markdown(report)
 
-    Path(args.output).write_text(content, encoding="utf-8")
+    Path(args.output).write_text(markdown, encoding="utf-8")
     print(f"Reporte generado en {args.output}")
 
 
