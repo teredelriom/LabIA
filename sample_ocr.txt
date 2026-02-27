@@ -1,0 +1,9 @@
+Hb: 10.2 g/dL
+VCM: 73 fL
+Creat: 2.8 mg/dL
+eGFR: 25 mL/min/1.73m2
+Na: 122 mEq/L
+Leucocitos: 14 10^3/uL
+Neut: 82 %
+AST: 70 U/L
+ALT: 65 U/L
